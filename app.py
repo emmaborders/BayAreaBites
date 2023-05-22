@@ -1,85 +1,75 @@
-from flask import Flask, render_template, request, redirect, url_for
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask import *
+from database import init_db, db_session
+from models import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
-app.config['SECRET_KEY'] = 'mysecretkey'
+app.secret_key = "Change Me"
 
-db = SQLAlchemy(app)
 
-class Restaurant(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    cuisine_style = db.Column(db.String(100), nullable=False)
-    address = db.Column(db.String(200), nullable=False)
+app = Flask(__name__)
+app.secret_key = 'secret'
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    password_hash = db.Column(db.String(100), nullable=False)
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
-
-class Favorite(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    restaurant_id = db.Column(db.Integer, db.ForeignKey('restaurant.id'), nullable=False)
-
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def home():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        user = User.query.filter_by(username=username).first()
-
-        if user is None or not user.check_password(password):
-            error = 'Invalid username or password.'
-            return render_template('login.html', error=error)
-
-        return redirect(url_for('favorites'))
-
     return render_template('index.html')
 
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form['username']
+    password = request.form['password']
+    user = db_session.query(User).where(User.username == username).first()
+    if user:
+        session['user'] = user.id
+        return redirect('/restaurants')
+    else:
+        return redirect('/')
 
-@app.route('/signup', methods=['GET', 'POST'])
+@app.route('/signup', methods=['POST'])
 def signup():
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
+    username = request.form
 
-        if not username or not password:
-            error = 'Please enter a username and password.'
-            return render_template('signup.html', error=error)
-
-        if User.query.filter_by(username=username).first() is not None:
-            error = 'Username already exists.'
-            return render_template('signup.html', error=error)
-
-        user = User(username=username)
-        user.set_password(password)
-        db.session.add(user)
-        db.session.commit()
-
-        return redirect(url_for('home'))
-
-    return render_template('signup.html')
 
 @app.route('/favorites')
 def favorites():
-    # Get the user from the database
-    user = User.query.filter_by(username=request.form['username']).first()
+    res = db_session.query(Restaurant).all()
+    print(res[0].address)
+    user = db_session.query(User).where(User.id == session["user"]).first()
+    return render_template('favorites.html', restaurants=res, favorites=user.favorties)
 
-    # Get the user's favorite restaurants
-    favorites = Favorite.query.filter_by(user_id=user.id).all()
 
-    return render_template('favorites.html', favorites=favorites)
+@app.route('/restaurants', methods=["GET", "POST"])
+def restaurants():
+    res = db_session.query(Restaurant).all()
+    print(res[0].address)
+    user = db_session.query(User).where(User.id == session["user"]).first()
+
+    return render_template('restaurants.html', restaurants=res, favorites=user.favorties)
+
+
+@app.route('/fav/<id>')
+def fav(id):
+    print(id)
+    print(session["user"])
+
+    existing_favorite = db_session.query(Favorite).filter_by(user_id=session["user"], restaurant_id=id).first()
+    
+    if existing_favorite:
+        db_session.delete(existing_favorite)
+        db_session.commit()
+        return redirect('/restaurants')
+    else:
+        new_favorite = Favorite(user_id=session["user"], restaurant_id=restaurant_id)
+        db_session.add(new_favorite)
+        db_session.commit()
+        return redirect('/restaurants')
+
+    
+    
 
 if __name__ == '__main__':
+    init_db()
     app.run(debug=True)
+
 

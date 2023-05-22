@@ -30,6 +30,24 @@
             font-weight: 245;
         }
 
+        .address {
+            font-family: 'Avenir Next', sans-serif;
+            letter-spacing: 0.04em;
+            font-weight: 400;
+            text-align: center;
+            padding: 10px;
+        }
+
+        img {
+            max-width: 80%;
+            max-height: 80%;
+            object-fit: contain;
+            position: relative;
+            left: 50%;
+            transform: translateX(-55%);
+
+        }
+
 
         nav {
             font-weight: 300 !important;
@@ -73,134 +91,43 @@
                 <a class="nav-link {{ 'active' if active_page == 'favorites' else '' }}" href="/favorites">Favorites</a>
                 </li>
             </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Username</a></li>
-            </ul>
+            
         </div>
     </nav>
-
-
     <div class="container" style="padding: 30px; padding-top: 60px;" id="my-card">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card" style="border: 1.6px solid rgb(86, 86, 86); background-color: #EDFBE9">
+            {% for res in restaurants %}
+            {% if res in favorites %}
+            <div class="col-md-4" style="margin-bottom: 35px;">
+                <div class="card" style="border: 1.6px solid rgb(86, 86, 86); background-color: #EDFBE9;">
                     <div class="card-body" style="border: 12px solid #EDFBE9;">
                         <div style="border: 1.6px solid rgb(86, 86, 86); height: 100%; position: relative;">
                             <div
-                                style="border-bottom: 1.6px solid rgb(86, 86, 86); height: 50%; background-color: white;">
+                                style="border-bottom: 1.6px solid rgb(86, 86, 86); height: 50%; background-color: white; display:flex; align-items:center;">
+                                <img src="/static/images/{{res.image_url}}">
                             </div>
-                            <div style="background-color: #feedf4; height: 50%; position: relative;">
-                                <button class="btn btn-light"
-                                    style="position: absolute; top: -150px; right: 10px; background-color: #ffc0cb; width: 30px; height: 30px; border: none; border-radius: 10%;">
-                                    <i class="fas fa-heart"
-                                        style="color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            <div
+                                style="background-color: #feedf4; height: 50%; position: relative; display:flex; align-items:center;">
+                                <p class="address">{{res.address}}</p>
 
-            <div class="col-md-4">
-                <div class="card" style="border: 1.6px solid rgb(86, 86, 86); background-color: #EDFBE9">
-                    <div class="card-body" style="border: 12px solid #EDFBE9;">
-                        <div style="border: 1.6px solid rgb(86, 86, 86); height: 100%; position: relative;">
-                            <div
-                                style="border-bottom: 1.6px solid rgb(86, 86, 86); height: 50%; background-color: white;">
-                            </div>
-                            <div style="background-color: #feedf4; height: 50%; position: relative;">
-                                <button class="btn btn-light"
+                                <a class="btn btn-light" href="/fav/{{res.id}}"
                                     style="position: absolute; top: -150px; right: 10px; background-color: #ffc0cb; width: 30px; height: 30px; border: none; border-radius: 10%;">
-                                    <i class="fas fa-heart"
-                                        style="color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-md-4">
-                <div class="card" style="border: 1.6px solid rgb(86, 86, 86); background-color: #EDFBE9">
-                    <div class="card-body" style="border: 12px solid #EDFBE9;">
-                        <div style="border: 1.6px solid rgb(86, 86, 86); height: 100%; position: relative;">
-                            <div
-                                style="border-bottom: 1.6px solid rgb(86, 86, 86); height: 50%; background-color: white;">
-                            </div>
-                            <div style="background-color: #feedf4; height: 50%; position: relative;">
-                                <button class="btn btn-light"
-                                    style="position: absolute; top: -150px; right: 10px; background-color: #ffc0cb; width: 30px; height: 30px; border: none; border-radius: 10%;">
+                                    {% if res in favorites %}
+                                    <i class="fas fa-heart"
+                                        style="color: #e63771; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                                    {% else %}
                                     <i class="fas fa-heart"
                                         style="color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
-                                </button>
+                                    {% endif %}
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div class="container" style="padding: 30px; padding-top: 60px;" id="my-card">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card" style="border: 1.6px solid rgb(86, 86, 86); background-color: #EDFBE9">
-                    <div class="card-body" style="border: 12px solid #EDFBE9;">
-                        <div style="border: 1.6px solid rgb(86, 86, 86); height: 100%; position: relative;">
-                            <div
-                                style="border-bottom: 1.6px solid rgb(86, 86, 86); height: 50%; background-color: white;">
-                            </div>
-                            <div style="background-color: #feedf4; height: 50%; position: relative;">
-                                <button class="btn btn-light"
-                                    style="position: absolute; top: -150px; right: 10px; background-color: #ffc0cb; width: 30px; height: 30px; border: none; border-radius: 10%;">
-                                    <i class="fas fa-heart"
-                                        style="color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card" style="border: 1.6px solid rgb(86, 86, 86); background-color: #EDFBE9">
-                    <div class="card-body" style="border: 12px solid #EDFBE9;">
-                        <div style="border: 1.6px solid rgb(86, 86, 86); height: 100%; position: relative;">
-                            <div
-                                style="border-bottom: 1.6px solid rgb(86, 86, 86); height: 50%; background-color: white;">
-                            </div>
-                            <div style="background-color: #feedf4; height: 50%; position: relative;">
-                                <button class="btn btn-light"
-                                    style="position: absolute; top: -150px; right: 10px; background-color: #ffc0cb; width: 30px; height: 30px; border: none; border-radius: 10%;">
-                                    <i class="fas fa-heart"
-                                        style="color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card" style="border: 1.6px solid rgb(86, 86, 86); background-color: #EDFBE9">
-                    <div class="card-body" style="border: 12px solid #EDFBE9;">
-                        <div style="border: 1.6px solid rgb(86, 86, 86); height: 100%; position: relative;">
-                            <div
-                                style="border-bottom: 1.6px solid rgb(86, 86, 86); height: 50%; background-color: white;">
-                            </div>
-                            <div style="background-color: #feedf4; height: 50%; position: relative;">
-                                <button class="btn btn-light"
-                                    style="position: absolute; top: -150px; right: 10px; background-color: #ffc0cb; width: 30px; height: 30px; border: none; border-radius: 10%;">
-                                    <i class="fas fa-heart"
-                                        style="color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+            {%endif%}
+            {% endfor %}
 
 
     <!-- Your Content ABOVE this Line -->
