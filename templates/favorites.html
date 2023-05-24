@@ -4,70 +4,144 @@
 <head>
     <title>{% block title%}{% endblock %}</title>
 
-    
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="style.css">
 
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
 
     <!-- Your Personal CSS BELOW this Line -->
-    <style>
-        .background {
-            background-color: #EDFBE9;
-        }
 
-
-        .avenir {
-            font-family: 'Avenir Next', sans-serif;
-            letter-spacing: 0.04em;
-            font-weight: 245;
-        }
-
-        .address {
-            font-family: 'Avenir Next', sans-serif;
-            letter-spacing: 0.04em;
-            font-weight: 400;
-            text-align: center;
-            padding: 10px;
-        }
-
-        img {
-            max-width: 80%;
-            max-height: 80%;
-            object-fit: contain;
-            position: relative;
-            left: 50%;
-            transform: translateX(-55%);
-
-        }
-
-
-        nav {
-            font-weight: 300 !important;
-
-        }
-
-        .card {
-            height: 400px;
-        }
-
-        .btn:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px #ffc0cb;
-        }
-
-        @media only screen and (min-width: 768px) {}
-    </style>
 </head>
 
+<style>
+    .background {
+        background-color: #EDFBE9;
+    }
 
+
+    .avenir {
+        font-family: 'Avenir Next', sans-serif;
+        letter-spacing: 0.04em;
+        font-weight: 245;
+    }
+
+    .address {
+        font-family: 'Avenir Next', sans-serif;
+        letter-spacing: 0.04em;
+        font-weight: 400;
+        text-align: center;
+        padding: 10px;
+    }
+
+    img {
+        max-width: 80%;
+        max-height: 80%;
+        object-fit: contain;
+        position: relative;
+        left: 50%;
+        transform: translateX(-55%);
+
+    }
+
+
+    nav {
+        font-weight: 300 !important;
+
+    }
+
+    .card {
+        height: 400px;
+        border: 1.6px solid rgb(86, 86, 86);
+        background-color: #EDFBE9;
+    }
+
+    .btn:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px #ffc0cb;
+    }
+
+    .container {
+        padding: 30px;
+        padding-top: 60px;
+
+    }
+
+    .col-md-4 {
+        margin-bottom: 35px;
+    }
+
+    .card-body {
+        border: 12px solid #EDFBE9;
+    }
+
+    .card-content {
+        border: 1.6px solid rgb(86, 86, 86);
+        height: 100%;
+        position: relative;
+    }
+
+    .card-top {
+        border-bottom: 1.6px solid rgb(86, 86, 86);
+        height: 50%;
+        background-color: white;
+        display: flex;
+        align-items: center;
+    }
+
+    .card-bottom {
+        background-color: #feedf4;
+        height: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .btn-light {
+        position: absolute;
+        top: -150px;
+        right: 10px;
+        background-color: #ffc0cb;
+        width: 30px;
+        height: 30px;
+        border: none;
+        border-radius: 10%;
+    }
+
+    .btn-light:hover {
+        background-color: #ffc0cb;
+    }
+
+
+
+    .heart-favorited {
+        color: #e63771;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .heart-unfavorited {
+        color: white;
+        font-size: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @media only screen and (min-width: 768px) {}
+</style>
 
 <body>
     <!-- NavBar -->
@@ -77,7 +151,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- TODO: Fix the links -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"></li>
@@ -91,34 +164,31 @@
                 <a class="nav-link {{ 'active' if active_page == 'favorites' else '' }}" href="/favorites">Favorites</a>
                 </li>
             </ul>
-            
+
         </div>
     </nav>
-    <div class="container" style="padding: 30px; padding-top: 60px;" id="my-card">
+
+    <!--loop that creates a bootstap card for each restaurant in thats user's favorites-->
+    <div class="container">
         <div class="row">
             {% for res in restaurants %}
             {% if res in favorites %}
-            <div class="col-md-4" style="margin-bottom: 35px;">
-                <div class="card" style="border: 1.6px solid rgb(86, 86, 86); background-color: #EDFBE9;">
-                    <div class="card-body" style="border: 12px solid #EDFBE9;">
-                        <div style="border: 1.6px solid rgb(86, 86, 86); height: 100%; position: relative;">
-                            <div
-                                style="border-bottom: 1.6px solid rgb(86, 86, 86); height: 50%; background-color: white; display:flex; align-items:center;">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-content">
+                            <div class="card-top">
                                 <img src="/static/images/{{res.image_url}}">
                             </div>
-                            <div
-                                style="background-color: #feedf4; height: 50%; position: relative; display:flex; align-items:center;">
+                            <div class="card-bottom">
                                 <p class="address">{{res.address}}</p>
 
-                                <a class="btn btn-light" href="/fav/{{res.id}}"
-                                    style="position: absolute; top: -150px; right: 10px; background-color: #ffc0cb; width: 30px; height: 30px; border: none; border-radius: 10%;">
+                                <a class="btn btn-light" href="/fav/{{res.id}}">
 
                                     {% if res in favorites %}
-                                    <i class="fas fa-heart"
-                                        style="color: #e63771; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                                    <i class="fas fa-heart heart-favorited"></i>
                                     {% else %}
-                                    <i class="fas fa-heart"
-                                        style="color: white; font-size: 20px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></i>
+                                    <i class="fas fa-heart heart-unfavorited"></i>
                                     {% endif %}
                                 </a>
                             </div>
@@ -129,36 +199,35 @@
             {%endif%}
             {% endfor %}
 
+            <!--JacaScript function that toggles between a clicked and unclicked favorite button-->
+            <script>
+                const cards = document.querySelectorAll(".card");
 
-    <!-- Your Content ABOVE this Line -->
-    <script>
-        const cards = document.querySelectorAll(".card");
-      
-        cards.forEach(function(card) {
-          const button = card.querySelector("button");
-      
-          button.addEventListener("click", function () {
-            if (button.classList.contains("clicked")) {
-              button.style.borderColor = "none";
-              button.classList.remove("clicked");
-              button.querySelector("i").style.color = "white";
-            } else {
-              button.style.borderColor = "none";
-              button.classList.add("clicked");
-              button.querySelector("i").style.color = "#e63771";
-            }
-          });
-        });
-      </script>
+                cards.forEach(function (card) {
+                    const button = card.querySelector("button");
+
+                    button.addEventListener("click", function () {
+                        if (button.classList.contains("clicked")) {
+                            button.style.borderColor = "none";
+                            button.classList.remove("clicked");
+                            button.querySelector("i").style.color = "white";
+                        } else {
+                            button.style.borderColor = "none";
+                            button.classList.add("clicked");
+                            button.querySelector("i").style.color = "#e63771";
+                        }
+                    });
+                });
+            </script>
 
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/945d436d2f.js" crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/945d436d2f.js" crossorigin="anonymous"></script>

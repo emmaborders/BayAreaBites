@@ -1,231 +1,247 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>{% block title%}{% endblock %}</title>
 
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <title>{% block title%}{% endblock %}</title>
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <link rel="stylesheet" href="style.css">
-        <!-- Your Personal CSS BELOW this Line -->
-        <style>
-            .background,
-            .box{
-                background-color: #EDFBE9;
-            }
-            .box {
-                margin: 50px auto;
-                width: 300px;
-                border-radius: 15px;
-                padding: 20px;
-                border: 1px solid gray;
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-            }
-    
-    
-            .btn-log-in {
-                background-color: white;
-                color: black;
-                border: 1px solid grey;
-                border-radius: 5px;
-                width: 100px;
-                margin-right: 10px;
-            }
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-            .btn-sign-up {
-                background-color: white;
-                color: black;
-                border: 1px solid grey;
-                border-radius: 5px;
-                width: 100px;
-                margin-left: 10px;
-            }
-    
-           
-    
-           .title{
+    <!--style (I tried to get a style sheet to link for so long but it wouldn't work)-->
+    <style>
+        .background,
+        .box {
+            background-color: #EDFBE9;
+        }
+
+        .box {
+            margin: 50px auto;
+            width: 300px;
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid gray;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        .btn-log-in {
+            background-color: white;
+            color: black;
+            border: 1px solid grey;
+            border-radius: 5px;
+            width: 100px;
+            margin-right: 10px;
+        }
+
+        .btn-sign-up {
+            background-color: white;
+            color: black;
+            border: 1px solid grey;
+            border-radius: 5px;
+            width: 100px;
+            margin-left: 10px;
+        }
+
+
+
+        .title {
             font-size: 45px;
             margin-top: 60px;
-           }
-    
-           .avenir {
+        }
+
+        .avenir {
             font-family: 'Avenir Next', sans-serif;
             letter-spacing: 0.04em;
             font-weight: 245;
-          }
+        }
 
-            .login-signup{
-                padding-left: 30px;
-                padding-right: 30px;
+        .login-signup {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+
+        nav {
+            font-weight: 300 !important;
+
+        }
+
+        .login-signup {
+            font-weight: 300 !important;
+            font-size: 14px !important;
+            color: gray;
+            background-color: white;
+            border: 1px solid gray;
+        }
+
+        .user-input-box {
+            font-weight: 200;
+        }
+
+        .btn-log-in:hover {
+            border: 2px solid gray;
+        }
+
+        .btn-sign-up:hover {
+            border: 2px solid gray;
+        }
+
+        .login-signup:hover {
+            border: 2px solid gray;
+            background-color: white;
+            color: gray;
+        }
+
+        .login-signup:active {
+            background-color: white !important;
+            color: gray !important;
+        }
+
+
+        .btn {
+            font-weight: 200;
+        }
+
+        @media only screen and (min-width: 768px) {
+            .box {
+                width: 500px;
+                padding: 40px;
+                border: 1.5px solid gray;
             }
 
-            nav{
-                font-weight: 300 !important;
-
+            .login-signup {
+                padding-left: 50px;
+                padding-right: 50px;
+                height: 55px;
+                border-radius: 8px;
+                font-weight: 300;
+                font-size: 20px !important;
             }
 
-            .login-signup{
-                font-weight: 300 !important;
-                font-size: 14px !important;
-                color: gray;
-                background-color: white;
-                border: 1px solid gray;
+            .title {
+                font-size: 68px;
+                margin-top: 80px;
             }
 
-            .user-input-box{
+
+            .btn-sign-up {
+                width: 150px;
+                height: 55px;
+                border-radius: 8px;
+            }
+
+            .btn-log-in {
+                width: 150px;
+                height: 55px;
+                border-radius: 8px;
+            }
+
+            .user-input-box {
+                height: 50px;
+                border-radius: 8px;
+                font-size: 25px;
                 font-weight: 200;
             }
 
-            .btn-log-in:hover{
-                border: 2px solid gray;
-            }
-
-            .btn-sign-up:hover{
-                border: 2px solid gray;
-            }
-
-            .login-signup:hover{
-                border: 2px solid gray;
-                background-color: white;
-                color: gray;
-            }
-
-            .login-signup:active{
-                background-color: white !important;
-                color: gray !important;
-            }
-
-
-            .btn{
+            .btn {
+                font-size: 25px;
                 font-weight: 200;
             }
-
-            @media only screen and (min-width: 768px) {
-                .box {
-                    width: 500px;
-                    padding: 40px;
-                    border: 1.5px solid gray;
-                }
-        
-                .login-signup{
-                    padding-left: 50px;
-                    padding-right: 50px;
-                    height: 55px;
-                    border-radius: 8px;
-                    font-weight: 300;
-                    font-size: 20px !important;
-                }
-
-                .title{
-                    font-size: 68px;
-                    margin-top: 80px;
-                   }
-
-              
-                .btn-sign-up {
-                    width: 150px;
-                    height: 55px;
-                    border-radius: 8px;
-                }
-
-                .btn-log-in{
-                    width: 150px;
-                    height: 55px;
-                    border-radius: 8px;
-                }
-                .user-input-box{
-                    height: 50px;
-                    border-radius: 8px;
-                    font-size: 25px;
-                    font-weight: 200;
-                }
-
-                .btn{
-                    font-size: 25px;
-                    font-weight: 200;
-                }
-            }
-
-        </style>
-    </head>
+        }
+    </style>
+</head>
 
 
 
-    <body>
-        <!-- NavBar -->
-        <nav class="nav navbar navbar-expand-lg navbar-light background text avenir">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<body>
+    <!-- NavBar -->
+    <nav class="nav navbar navbar-expand-lg navbar-light background text avenir">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!-- TODO: Fix the links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"></li>
-                        <a class="nav-link {{ 'active' if active_page == 'home' else '' }}" href="/">Home</a>
-                    </li>
-                    <li class="nav-item"></li>
-                        <a class="nav-link {{ 'active' if active_page == 'restaurants' else '' }}" href="/restaurants">Restaurants</a>
-                    </li>
-                    <li class="nav-item"></li>
-                    <a class="nav-link {{ 'active' if active_page == 'favorites' else '' }}" href="/favorites">Favorites</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"></li>
+                <a class="nav-link {{ 'active' if active_page == 'home' else '' }}" href="/">Home</a>
                 </li>
-                </ul>
-            </div>
-        </nav>
+                <li class="nav-item"></li>
+                <a class="nav-link {{ 'active' if active_page == 'restaurants' else '' }}"
+                    href="/restaurants">Restaurants</a>
+                </li>
+                <li class="nav-item"></li>
+                <a class="nav-link {{ 'active' if active_page == 'favorites' else '' }}" href="/favorites">Favorites</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
-        <div class="container avenir words buttons">
-            <div class="row justify-content-center">
-                <h2 class="avenir title">Bay Area Bites</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="box">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-log-in">Log In</button>
-                        <button type="button" class="btn btn-sign-up">Sign Up</button>
-                    </div>
-                    <form id="login-form" method="post" action="/login">
-                        <div class="form-group mt-3">
-                            <input type="text" class="form-control user-input-box" name="username" placeholder="Username">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control user-input-box" name="password" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary mt-3 login-signup" name="login">LOG IN</button>
-                    </form>
+    <!--Container holding the log-in/sign-up buttons and text boxes-->
+    <div class="container avenir words buttons">
+        <div class="row justify-content-center">
+            <h2 class="avenir title">Bay Area Bites</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="box">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-log-in">Log In</button>
+                    <button type="button" class="btn btn-sign-up">Sign Up</button>
                 </div>
+                <form id="login-form" method="post" action="/login">
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control user-input-box" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control user-input-box" name="password"
+                            placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3 login-signup" name="login">LOG IN</button>
+                </form>
+                <form style="display: none" id="signup-form" method="post" action="/signup">
+                    <div class="form-group mt-3">
+                        <input type="text" class="form-control user-input-box" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control user-input-box" name="password"
+                            placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3 login-signup" name="login">SIGN UP</button>
+                </form>
             </div>
         </div>
-        
-        <script>
-            document.querySelector('.btn-log-in').addEventListener('click', function() {
-                document.querySelector('#login-form').style.display = 'block';
-                document.querySelector('#signup-form').style.display = 'none';
-            });
-        
-            document.querySelector('.btn-sign-up').addEventListener('click', function() {
-                document.querySelector('#login-form').style.display = 'none';
-                document.querySelector('#signup-form').style.display = 'block';
-            });
-        </script>
-        
-    
-        <!-- Your Content ABOVE this Line -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+    </div>
+
+
+    <!--JavaScript that hides "sign-up" when log-in is clicked and vice verse 
+            (these two events look pretty much the same but will function differently)-->
+    <script>
+        document.querySelector('.btn-log-in').addEventListener('click', function () {
+            document.querySelector('#login-form').style.display = 'block';
+            document.querySelector('#signup-form').style.display = 'none';
+        });
+
+        document.querySelector('.btn-sign-up').addEventListener('click', function () {
+            document.querySelector('#login-form').style.display = 'none';
+            document.querySelector('#signup-form').style.display = 'block';
+        });
+    </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>

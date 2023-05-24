@@ -5,11 +5,8 @@ from models import *
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydatabase.db'
-app.secret_key = "Change Me"
-
-
-app = Flask(__name__)
 app.secret_key = 'secret'
+
 
 @app.route('/')
 def home():
@@ -28,7 +25,19 @@ def login():
 
 @app.route('/signup', methods=['POST'])
 def signup():
-    username = request.form
+    username = request.form['username']
+    password = request.form['password']
+    
+    user_exists = db_session.query(User).filter_by(username=username).first()
+    if user_exists:
+        return redirect('/')
+    
+    new_user = User(username=username, password=password)
+    
+    db_session.add(new_user)
+    db_session.commit()
+    
+    return redirect('/restaurants')
 
 
 @app.route('/favorites')
@@ -60,12 +69,11 @@ def fav(id):
         db_session.commit()
         return redirect('/restaurants')
     else:
-        new_favorite = Favorite(user_id=session["user"], restaurant_id=restaurant_id)
+        new_favorite = Favorite(user_id=session["user"], restaurant_id=id)
         db_session.add(new_favorite)
         db_session.commit()
         return redirect('/restaurants')
 
-    
     
 
 if __name__ == '__main__':
